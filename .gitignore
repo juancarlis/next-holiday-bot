@@ -132,4 +132,4 @@ dmypy.json
 .vim/
 
 #APIs Config
-.Config.py
+config.py
