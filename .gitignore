@@ -130,3 +130,6 @@ dmypy.json
 
 # vim
 .vim/
+
+#APIs Config
+.Config.py
