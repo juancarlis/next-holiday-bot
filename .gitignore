@@ -133,3 +133,5 @@ dmypy.json
 
 #APIs Config
 config.py
+
+holidays_download.csv
