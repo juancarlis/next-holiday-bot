@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "next-holiday-bot"
+version = "0.1.0"
+description = "Bot that sends a whatsapp message with the remaining days to the next holliday."
+authors = ["Juan I. Carlis <juancarlis93@gmail.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+pandas = "^1.4.3"
+requests = "^2.28.1"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+next-holiday = "next_holiday_bot.next_holiday:main"
