@@ -1,14 +1,16 @@
-import requests
-from datetime import datetime
+from datetime import datetime, date
 
 import pandas as pd
+import requests
 
 
 def main():
 
-    fecha = datetime.now()
+    fecha = date.today()
 
-    df = _extract(fecha.year)
+    df = _extract(year=fecha.year)
+    df = _transform(df=df, fecha=fecha)
+
     print(df)
 
 
@@ -29,6 +31,19 @@ def _extract(year: int) -> pd.DataFrame:
         print('API Error')
         return 1
 
+
+def _transform(df: pd.DataFrame, fecha: date) -> pd.DataFrame:
+    """Removes unwanted holidays from original dataframe by
+    filtering off Judaism and Musulman holidays from the dataframe
+    and by droping oldest dates than the given one at [fecha]. 
+    """
+    df = df.loc[(df['religion'] != 'judaísmo') & (df['religion'] != 'musulman'), :]
+
+    fecha = datetime(fecha.year, fecha.month, fecha.day)
+    df = df.loc[df['fecha'] >= fecha, :].reset_index()
+
+    return df
+    
 
 if __name__ == '__main__':
     main()
