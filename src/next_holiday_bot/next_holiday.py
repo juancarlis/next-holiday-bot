@@ -1,18 +1,16 @@
 from datetime import datetime, date
-
 import pandas as pd
 import requests
 
 
 def main():
-
     fecha = date.today()
 
     df = _extract(year=fecha.year)
     df = _transform(df=df, fecha=fecha)
+    breakpoint()
 
     print(df)
-
 
 def _extract(year: int) -> pd.DataFrame:
     """Extracts the argentinian holidays data from 
@@ -40,10 +38,12 @@ def _transform(df: pd.DataFrame, fecha: date) -> pd.DataFrame:
     df = df.loc[(df['religion'] != 'judaísmo') & (df['religion'] != 'musulman'), :]
 
     fecha = datetime(fecha.year, fecha.month, fecha.day)
-    df = df.loc[df['fecha'] >= fecha, :].reset_index()
+    df = df.loc[df['fecha'] >= fecha, :]
+
+    df['dias_restantes'] = df['fecha'].apply(lambda x: x - fecha)
 
     return df
-    
+
 
 if __name__ == '__main__':
     main()
